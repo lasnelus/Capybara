@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Capybara</string>
-    <string name="home_today">Aujourd\'hui</string>
+    <string name="home_today">Today</string>
     <string name="degree_value">%d °C</string>
-    <string name="detailed_view">Prévisions détaillés</string>
+    <string name="detailed_view">Detailed view</string>
 </resources>
