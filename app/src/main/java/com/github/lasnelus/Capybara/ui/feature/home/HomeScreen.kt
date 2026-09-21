@@ -1,10 +1,10 @@
 package com.github.lasnelus.Capybara.ui.feature.home
 
-import android.content.Context
-import android.widget.Toast
+import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.launch
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -34,6 +34,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.github.lasnelus.Capybara.R
+import java.time.LocalDate
 
 @Composable
 fun MyImage(imageBitmap: ImageBitmap?) {
@@ -55,8 +56,11 @@ fun MyImage(imageBitmap: ImageBitmap?) {
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun HomeScreen(context: Context) {
+fun HomeScreen(
+    onDetailClick: (String) -> Unit
+) {
     var imageBitmap by remember { mutableStateOf<ImageBitmap?>(null) }
     val cameraLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.TakePicturePreview()
@@ -108,7 +112,7 @@ fun HomeScreen(context: Context) {
 
             Button(
                 onClick = {
-                    Toast.makeText(context, "J'ai cliqué !", Toast.LENGTH_SHORT).show()
+                    onDetailClick(LocalDate.now().toString())
                 }
             ) {
                 Text(
