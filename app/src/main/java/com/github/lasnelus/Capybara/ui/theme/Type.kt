@@ -17,13 +17,6 @@ private val NunitoFontFamily: FontFamily = FontFamily(
 
 // Set of Material typography styles to start with
 val Typography = Typography(
-    bodyLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
-    ),
     titleLarge = TextStyle(
         fontFamily = NunitoFontFamily,
         fontSize = 70.sp,
@@ -41,5 +34,23 @@ val Typography = Typography(
         fontSize = 70.sp,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.Medium
+    ),
+    bodySmall = TextStyle(
+        fontFamily = NunitoFontFamily,
+        fontSize = 12.sp,
+        fontStyle = FontStyle.Normal,
+        fontWeight = FontWeight.Normal
+    ),
+    bodyMedium = TextStyle(
+        fontFamily = NunitoFontFamily,
+        fontSize = 18.sp,
+        fontStyle = FontStyle.Normal,
+        fontWeight = FontWeight.Medium
+    ),
+    bodyLarge = TextStyle(
+        fontFamily = NunitoFontFamily,
+        fontSize = 24.sp,
+        fontStyle = FontStyle.Normal,
+        fontWeight = FontWeight.Bold
     ),
 )
