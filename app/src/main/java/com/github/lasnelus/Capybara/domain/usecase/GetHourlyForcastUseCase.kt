@@ -15,7 +15,6 @@ object GetHourlyForecastUseCase {
             HourlyForecast("6h", 15, WeatherCondition.Moon),
             HourlyForecast("7h", 16, WeatherCondition.Cloud),
             HourlyForecast("8h", 17, WeatherCondition.Cloud),
-            HourlyForecast("8h", 17, WeatherCondition.Cloud),
             HourlyForecast("9h", 18, WeatherCondition.Cloud),
             HourlyForecast("10h", 18, WeatherCondition.SunCloud),
             HourlyForecast("11h", 19, WeatherCondition.SunCloud),

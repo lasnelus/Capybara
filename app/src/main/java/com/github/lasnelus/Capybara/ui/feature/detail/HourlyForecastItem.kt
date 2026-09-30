@@ -17,6 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.github.lasnelus.Capybara.R
 import com.github.lasnelus.Capybara.domain.data.HourlyForecast
+import com.github.lasnelus.Capybara.domain.data.WeatherCondition
 
 @Composable
 fun HourlyForecastItem(
@@ -46,8 +47,19 @@ fun HourlyForecastItem(
         )
 
         Image(
-            painter = painterResource(R.drawable.il_sun_cloud),
-            contentDescription = forecast.condition.toString(),
+            painter = painterResource(
+                when (forecast.condition) {
+                    WeatherCondition.Sunny -> R.drawable.il_sunny
+                    WeatherCondition.SunCloud -> R.drawable.il_sun_cloud
+                    WeatherCondition.Cloud -> R.drawable.il_cloud
+                    WeatherCondition.Fog -> R.drawable.il_fog
+                    WeatherCondition.Rain -> R.drawable.il_rain
+                    WeatherCondition.Snow -> R.drawable.il_snow
+                    WeatherCondition.SnowStorm -> R.drawable.il_snow_storm
+                    WeatherCondition.Moon -> R.drawable.il_moon
+                }
+            ),
+            contentDescription = forecast.condition.raw,
             modifier = Modifier.size(50.dp)
         )
     }

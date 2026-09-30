@@ -14,19 +14,27 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.github.lasnelus.Capybara.R
-import com.github.lasnelus.Capybara.domain.usecase.GetHourlyForecastUseCase
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(
     onBackClick: () -> Unit,
-    date: String
+    date: String,
+    viewModel: DetailViewModel = viewModel()
 ) {
-    val forecast = GetHourlyForecastUseCase.invoke(date)
+    val forecast by viewModel.hourlyForecast.collectAsStateWithLifecycle()
+    LaunchedEffect(date) {
+        viewModel.fetchHourlyForecast(date)
+    }
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -54,9 +62,16 @@ fun DetailScreen(
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            items(forecast) { item ->
+            item {
+                Text(
+                    text = stringResource(R.string.hourly_forecast_title),
+                    color = MaterialTheme.colorScheme.secondary,
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            }
+            items(items = forecast) { element ->
                 HourlyForecastItem(
-                    forecast = item,
+                    forecast = element,
                     modifier = Modifier.fillMaxWidth()
                 )
             }

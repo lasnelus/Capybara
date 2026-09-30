@@ -3,4 +3,6 @@
     <string name="home_today">Aujourd\'hui</string>
     <string name="degree_value">%d °C</string>
     <string name="detailed_view">Prévisions détaillés</string>
+    <string name="back">Retour</string>
+    <string name="hourly_forecast_title">Météo heure par heure</string>
 </resources>
