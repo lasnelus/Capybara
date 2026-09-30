@@ -4,17 +4,23 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.lasnelus.Capybara.domain.data.HourlyForecast
 import com.github.lasnelus.Capybara.domain.usecase.GetHourlyForecastUseCase
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlin.collections.emptyList
 
 class DetailViewModel : ViewModel() {
-    private val _hourlyForecast = MutableStateFlow<List<HourlyForecast>>(emptyList())
-    val hourlyForecast = _hourlyForecast.asStateFlow()
+    val hourlyForecast : StateFlow<List<HourlyForecast>> = GetHourlyForecastUseCase.invoke()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = emptyList()
+        )
 
-    fun fetchHourlyForecast(date: String) {
+    init {
         viewModelScope.launch {
-            _hourlyForecast.value = GetHourlyForecastUseCase.invoke(date)
+            SyncHourlyForecaseUseCase.invoke()
         }
     }
 }
